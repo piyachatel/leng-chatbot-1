@@ -7,8 +7,7 @@ import requests
 
 
 url = 'https://notify-api.line.me/api/notify'
-token = 'lLMRaHWCT6xlMxom5FMWAztZY1W1t8PpKjWRg7CIpKT'
-headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
+
 
 
 
@@ -57,10 +56,13 @@ def reply(replyToken, textList):
         "messages":msgs
     })
     requests.post(LINE_API, headers=headers, data=data)
+
+headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+'lLMRaHWCT6xlMxom5FMWAztZY1W1t8PpKjWRg7CIpKT'}
+    r = requests.post(url, headers=headers , data = {'message':'555'})
+
     return
 
 if __name__ == '__main__':
-    r = requests.post(url, headers=headers , data = {'message':'555'})
     app.run()
 
 
