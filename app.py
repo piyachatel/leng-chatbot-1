@@ -1,6 +1,16 @@
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
+
 from flask import Flask, request
 import json
 import requests
+
+
+url = 'https://notify-api.line.me/api/notify'
+token = 'lLMRaHWCT6xlMxom5FMWAztZY1W1t8PpKjWRg7CIpKT'
+headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
+
+
 
 # ตรง YOURSECRETKEY ต้องนำมาใส่เองครับจะกล่าวถึงในขั้นตอนต่อๆ ไป
 global LINE_API_KEY
@@ -50,4 +60,7 @@ def reply(replyToken, textList):
     return
 
 if __name__ == '__main__':
+    r = requests.post(url, headers=headers , data = {'message':'555'})
     app.run()
+
+
