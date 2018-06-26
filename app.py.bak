@@ -57,8 +57,8 @@ def reply(replyToken, textList):
     })
     requests.post(LINE_API, headers=headers, data=data)
 
-headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+'lLMRaHWCT6xlMxom5FMWAztZY1W1t8PpKjWRg7CIpKT'}
-    r = requests.post(url, headers=headers , data = {'message':'555'})
+#headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+'lLMRaHWCT6xlMxom5FMWAztZY1W1t8PpKjWRg7CIpKT'}
+#    r = requests.post(url, headers=headers , data = {'message':'555'})
 
     return
 

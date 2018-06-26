@@ -1,68 +1,37 @@
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 
-from flask import Flask, request
-import json
-import requests
-
-
-url = 'https://notify-api.line.me/api/notify'
-
-
-
-
-# ตรง YOURSECRETKEY ต้องนำมาใส่เองครับจะกล่าวถึงในขั้นตอนต่อๆ ไป
-global LINE_API_KEY
-LINE_API_KEY = 'Bearer 1ae570f4539f531d46df94c38903c06f'
-
+from flask import Flask, request, abort
+from linebot import (
+LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+InvalidSignatureError
+)
+from linebot.models import (
+MessageEvent, TextMessage, TextSendMessage,
+)
 app = Flask(__name__)
- 
-def index():
-    return 'This is chatbot server.'
-@app.route('/bot', methods=['POST'])
+line_bot_api = LineBotApi('WjghX90v2F34cxZzGr1yZxcHX5l6UA+DaW6svTh1ifUTZqXIweGMSS0kVTZwLB+II6Ej3kxMpbehs6V6Uxx4YKNN9v1yqklxgpDpp6fuT+WTuZyylt69cVMVr93lyGOUCZlu8eZxZm2MfBCqW+hp1wdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('1ae570f4539f531d46df94c38903c06f')
+@app.route("/callback", methods=['POST'])
+def callback():
+# get X-Line-Signature header value
+signature = request.headers['X-Line-Signature']
+# get request body as text
+body = request.get_data(as_text=True)
+app.logger.info("Request body: " + body)
+# handle webhook body
+try:
+handler.handle(body, signature)
+except InvalidSignatureError:
+abort(400)
+return 'OK'
 
-def bot():
-    # ข้อความที่ต้องการส่งกลับ
-    replyStack = list()
-   
-    # ข้อความที่ได้รับมา
-    msg_in_json = request.get_json()
-    msg_in_string = json.dumps(msg_in_json)
-    
-    # Token สำหรับตอบกลับ (จำเป็นต้องใช้ในการตอบกลับ)
-    replyToken = msg_in_json["events"][0]['replyToken']
-
-    # ทดลอง Echo ข้อความกลับไปในรูปแบบที่ส่งไป-มา (แบบ json)
-    replyStack.append(msg_in_string)
-    reply(replyToken, replyStack[:5])
-    
-    return 'OK',200
- 
-def reply(replyToken, textList):
-    # Method สำหรับตอบกลับข้อความประเภท text กลับครับ เขียนแบบนี้เลยก็ได้ครับ
-    LINE_API = 'https://api.line.me/v2/bot/message/reply'
-    headers = {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'WjghX90v2F34cxZzGr1yZxcHX5l6UA+DaW6svTh1ifUTZqXIweGMSS0kVTZwLB+II6Ej3kxMpbehs6V6Uxx4YKNN9v1yqklxgpDpp6fuT+WTuZyylt69cVMVr93lyGOUCZlu8eZxZm2MfBCqW+hp1wdB04t89/1O/w1cDnyilFU='
-    }
-    msgs = []
-    for text in textList:
-        msgs.append({
-            "type":"text",
-            "text":text
-        })
-    data = json.dumps({
-        "replyToken":replyToken,
-        "messages":msgs
-    })
-    requests.post(LINE_API, headers=headers, data=data)
-
-#headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+'lLMRaHWCT6xlMxom5FMWAztZY1W1t8PpKjWRg7CIpKT'}
-#    r = requests.post(url, headers=headers , data = {'message':'555'})
-
-    return
-
-if __name__ == '__main__':
-    app.run()
-
-
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+line_bot_api.reply_message(
+event.reply_token,
+TextSendMessage(text=event.message.text))
+if __name__ == "__main__":
+   app.run()
