@@ -6,6 +6,11 @@ app = Flask(__name__)
 def index():
   return "Hello World!"
 
+@app.route('/hello/<string:names>')
+def home(names):
+  return ("<h1>Hello %s!! </h1>" % names)
+
+
 # ส่วน callback สำหรับ Webhook
 @app.route('/callback', methods=['POST'])
 def callback():
@@ -14,7 +19,7 @@ def callback():
   decoded = json.loads(json_line)
   user = decoded["events"][0]['replyToken']
   #id=[d['replyToken'] for d in user][0]
-  #print(json_line)
+  print(json_line)
   print("ผู้ใช้：",user)
   sendText(user,'งง') # ส่งข้อความ งง
   return '',200
