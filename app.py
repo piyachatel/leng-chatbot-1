@@ -21,7 +21,8 @@ def callback():
   #id=[d['replyToken'] for d in user][0]
   print(json_line)
   print("ผู้ใช้：",user)
-  sendText(user,'งง') # ส่งข้อความ งง
+  print('ทดสอบ') 
+  sendText(user,'สวัสดีค่ะ') # ส่งข้อความ งง
   return '',200
 
 
@@ -35,7 +36,7 @@ def sendText(user, text):
   data = json.dumps({
   "replyToken":user,
   "messages":[{"type":"text","text":text}]})
-  #print("ข้อมูล：",data)
+  print("ข้อมูล：",data)
   r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
   #print(r.text)
 
