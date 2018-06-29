@@ -15,6 +15,8 @@ def home(names):
 @app.route('/postjson' , methods=['POST'])
 def postjson():
   print (request)
+  print (request.headers) 
+  print (request.data)
   json_line = request.get_json()
   json_line = json.dumps(json_line)
   decoded = json.loads(json_line)
