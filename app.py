@@ -12,6 +12,11 @@ def home(names):
   return ("<h1>Hello %s!! </h1>" % names)
 
 
+@app.route('/postjson')
+def postjson():
+  return ("<h1>Hello test </h1>" )
+
+
 # ส่วน callback สำหรับ Webhook
 @app.route('/callback', methods=['POST'])
 def callback():
