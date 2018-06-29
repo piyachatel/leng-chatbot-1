@@ -14,6 +14,12 @@ def home(names):
 
 @app.route('/postjson' , methods=['POST'])
 def postjson():
+  json_line = request.get_json()
+  json_line = json.dumps(json_line)
+  decoded = json.loads(json_line)
+  #id=[d['replyToken'] for d in user][0]
+  print(json_line)
+
   return ("<h1>Hello test </h1>" )
 
 
