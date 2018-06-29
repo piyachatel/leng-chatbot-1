@@ -17,6 +17,7 @@ def postjson():
   print (request)
   print (request.headers) 
   print (request.data)
+  print (request.data[0])
   json_line = request.get_json()
   json_line = json.dumps(json_line)
   decoded = json.loads(json_line)
