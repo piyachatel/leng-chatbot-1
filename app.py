@@ -34,9 +34,7 @@ def sendApi(user, text):
   headers = {
   'Content-Type': 'application/json; charset=UTF-8'
   }
-  data = json.dumps({
-  "replyToken":"55555",
-  "messages":[{"type":"text","text":"66666"}]})
+  data =  "replyToken test"
   print("ข้อมูล：",data)
   r = requests.post(TEST_API, headers=headers, data=data) 
   print (r.text)

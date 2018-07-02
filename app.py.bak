@@ -39,7 +39,7 @@ def sendApi(user, text):
   "messages":[{"type":"text","text":"66666"}]})
   print("ข้อมูล：",data)
   r = requests.post(TEST_API, headers=headers, data=data) 
-  print r.text
+  print (r.text)
 
 @app.route('/callback', methods=['POST'])
 def callback():
