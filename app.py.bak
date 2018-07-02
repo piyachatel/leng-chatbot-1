@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, request
-from googlefinance import getQuotes
 import json
 import requests
 app = Flask(__name__)
@@ -43,7 +42,6 @@ def callback():
   print('ทดสอบ') 
   sendText(user,'สวัสดีค่ะ') 
   symbol = 'PTT'       
-  print(json.dumps(getQuotes('SET:' + symbol), indent=2))
   return '',200
 
 
