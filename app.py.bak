@@ -29,7 +29,7 @@ def postjson():
   return ("<h1>Hello test </h1>" )
 
 @app.route('/sendapi' )
-def sendApi(user, text):
+def sendApi():
   print('--------------------------------------------------')
   TEST_API = 'https://chat.pt.co.th:5000'
   headers = {
