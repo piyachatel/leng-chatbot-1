@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import Flask, request
 from googlefinance import getQuotes
 import json
@@ -28,18 +30,18 @@ def postjson():
   return ("<h1>Hello test </h1>" )
 
 
-# ส่วน callback สำหรับ Webhook
+
 @app.route('/callback', methods=['POST'])
 def callback():
   json_line = request.get_json()
   json_line = json.dumps(json_line)
   decoded = json.loads(json_line)
   user = decoded["events"][0]['replyToken']
-  #id=[d['replyToken'] for d in user][0]
+
   print(json_line)
   print("ผู้ใช้：",user)
   print('ทดสอบ') 
-  sendText(user,'สวัสดีค่ะ') # ส่งข้อความ งง
+  sendText(user,'สวัสดีค่ะ') 
   symbol = 'PTT'       
   print(json.dumps(getQuotes('SET:' + symbol), indent=2))
   return '',200
@@ -56,8 +58,7 @@ def sendText(user, text):
   "replyToken":user,
   "messages":[{"type":"text","text":text}]})
   print("ข้อมูล：",data)
-  r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
-  #print(r.text)
+  r = requests.post(LINE_API, headers=headers, data=data) 
 
 
 if __name__ == '__main__':
