@@ -28,7 +28,18 @@ def postjson():
 
   return ("<h1>Hello test </h1>" )
 
-
+@app.route('/sendapi' )
+def sendApi(user, text):
+  TEST_API = 'https://chat.pt.co.th:5000'
+  headers = {
+  'Content-Type': 'application/json; charset=UTF-8'
+  }
+  data = json.dumps({
+  "replyToken":"55555",
+  "messages":[{"type":"text","text":"66666"}]})
+  print("ข้อมูล：",data)
+  r = requests.post(TEST_API, headers=headers, data=data) 
+  print r.text
 
 @app.route('/callback', methods=['POST'])
 def callback():
