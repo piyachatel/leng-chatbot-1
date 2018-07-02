@@ -38,7 +38,7 @@ def sendApi():
   data =  "replyToken test"
   print("ข้อมูล：",data)
   print('--------------------------------------------------')
-  #r = requests.post(TEST_API, headers=headers, data=data) 
+  r = requests.post(TEST_API, headers=headers, data=data) 
   print (r.text)
 
 @app.route('/callback', methods=['POST'])
