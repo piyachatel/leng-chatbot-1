@@ -31,7 +31,7 @@ def postjson():
 @app.route('/sendapi' )
 def sendApi():
   print('--------------------------------------------------')
-  TEST_API = 'https://chat.pt.co.th:5000'
+  TEST_API = 'http://chat.pt.co.th:5000'
   headers = {
   'Content-Type': 'application/json; charset=UTF-8'
   }
