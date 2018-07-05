@@ -33,7 +33,7 @@ def postjson():
   print (json_line) 
   print("___") 
 
-  return ({"nodes":[{"node_type":"node","nodeResponse":{"type":"text","response":"Your data "}}]} )
+  return ( json_line )
 
 @app.route('/sendapi' )
 def sendApi():
