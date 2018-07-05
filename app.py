@@ -24,9 +24,18 @@ def postjson():
   json_line = json.dumps(json_line)
   decoded = json.loads(json_line)
   #id=[d['replyToken'] for d in user][0]
+
+  json_line = json.dumps(json_line)
   print(json_line)
 
-  return (json.dumps({"nodes":[{"node_type":"node","nodeResponse":{"type":"text","response":"Your data "}}]}) )
+  msg = {"nodes":[{"node_type":"node","nodeResponse":{"type":"text","response":"Your data "}}]} 
+  json_line = json.dumps(msg)
+  print (json_line) 
+  print("___") 
+  json_line = json.loads(msg)
+  print (json_line) 
+
+  return ({"nodes":[{"node_type":"node","nodeResponse":{"type":"text","response":"Your data "}}]} )
 
 @app.route('/sendapi' )
 def sendApi():
