@@ -26,7 +26,7 @@ def postjson():
   #id=[d['replyToken'] for d in user][0]
   print(json_line)
 
-  return ("<h1>Hello test </h1>" )
+  return ('{"nodes":[{"node_type":"node","nodeResponse":{"type":"text","response":"Your data "}}]}' )
 
 @app.route('/sendapi' )
 def sendApi():
