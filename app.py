@@ -32,8 +32,6 @@ def postjson():
   json_line = json.dumps(msg)
   print (json_line) 
   print("___") 
-  json_line = json.loads(msg)
-  print (json_line) 
 
   return ({"nodes":[{"node_type":"node","nodeResponse":{"type":"text","response":"Your data "}}]} )
 
