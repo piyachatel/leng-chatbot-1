@@ -13,7 +13,7 @@ def home(names):
   return ("<h1>Hello %s!! </h1>" % names)
 
 
-@app.route('/postjson' , methods=['POST'])
+@app.route('/postjson' , methods=['POST','GET'])
 def postjson():
   print (request)
   print (request.headers) 
