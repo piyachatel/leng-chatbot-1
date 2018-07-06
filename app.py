@@ -6,7 +6,7 @@ import requests
 app = Flask(__name__)
 @app.route('/')
 def index():
-  return "Hello World!"
+  return '{"nodes":[{"node_type":"node","nodeResponse":{"type":"text","response":"Your data "}}]}'
 
 @app.route('/hello/<string:names>')
 def home(names):
